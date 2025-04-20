@@ -13,6 +13,8 @@
 #include <string>
 #include <vector>
 
+#include <filesystem>
+
 void Object::SetPosition(const Vector4d &newPosition)
 {
     position = newPosition;
@@ -214,7 +216,7 @@ void Object::Init()
         { // 材质库
             std::string mtlFile;
             iss >> mtlFile;
-            LoadMaterialLibrary(mtlFile, materials);
+            LoadMaterialLibrary((std::filesystem::path(filename).parent_path() / mtlFile).string(), materials);
         }
         else if (prefix == "usemtl")
         { // 使用材质

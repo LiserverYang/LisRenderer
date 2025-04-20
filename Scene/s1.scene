@@ -1,0 +1,24 @@
+# Copyrigt 2025, LiserverYang. All rights reserved.
+# The scene to test RasterizationRenderer
+
+# The camera:
+
+#   Position     GazeDirection   UpDirection
+c  0.0 0.0 0.0    0.0 0.0 -1.0   0.0 1.0 0.0
+
+# Objects:
+
+# Cube
+
+#    FilePath             Position      Scale       Rotation 
+# o ./Objects/cube.obj  2.0 0.0 -4.5  1.0 1.0 1.0  0.0 0.0 0.0
+
+# Ball
+
+#    FilePath           Position      Scale       Rotation 
+o ./Objects/ball.obj  0.0 0.0 -2.0  1.0 1.0 1.0  0.0 0.0 0.0
+
+# Lights
+
+#   Position     I
+l 0.0 0.0 0.0   0.35

@@ -25,33 +25,29 @@ private:
 public:
     Scene() = default;
 
-    void SetCamera(Camera &_camera)
-    {
-        camera = _camera;
-    }
+    /**
+     * 从.scene文件读取场景，此文件所有描述单独一行，# 开头的行表示该行为注释
+     * 其它的行描述如下：
+     * 
+     * o 开头表示定义场景中物体，其格式为：
+     * o 物体文件路径（相对路径以scene文件为计算标准） 物体位置 物体缩放 物体旋转
+     * 
+     * l 开头表示场景中的灯光，其格式为：
+     * l 灯光位置 灯光强度
+     * 
+     * c 开头表示场景中的摄像机，其格式为：
+     * c 摄像机位置 摄像机朝向 摄像机头顶朝向
+     * 
+     * @param filePath 要读取的scene文件路径
+     */
+    Scene(std::string filePath);
 
-    void SetObjects(ObjectList &objectList)
-    {
-        objects = objectList;
-    }
+    void SetCamera(Camera &_camera);
+    Camera &GetCamera();
 
-    void SetLights(LightList &lightList)
-    {
-        lights = lightList;
-    }
-
-    Camera &GetCamera()
-    {
-        return camera;
-    }
-
-    ObjectList &GetObjects()
-    {
-        return objects;
-    }
-
-    LightList &GetLights()
-    {
-        return lights;
-    }
+    void SetObjects(ObjectList &objectList);
+    ObjectList &GetObjects();
+    
+    void SetLights(LightList &lightList);
+    LightList &GetLights();
 };

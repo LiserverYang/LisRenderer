@@ -6,6 +6,8 @@
 
 #include "Eigen/Dense"
 
+using namespace Eigen;
+
 /**
  * Camera 是图形学意义上的摄像机
  */
