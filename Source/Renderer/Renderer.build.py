@@ -12,3 +12,4 @@ class RendererModule(BuildSystem.ModuleBase):
 
         self.BinaryType = BuildSystem.BinaryTypeEnum.DynamicLib
         self.ModulesDependOn = ["Eigen"]
+        self.EnableBinaryLibPrefix = False

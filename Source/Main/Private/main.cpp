@@ -3,6 +3,7 @@
  */
 
 #include "ImageDevice.hpp"
+#include "PNGDevice.hpp"
 #include "RasterizationRenderer.hpp"
 
 #include <iostream>
@@ -10,7 +11,7 @@
 int main(int argc, const char **argv)
 {
     // 初始化成像设备
-    Device *device{new ImageDevice{"./output.tga"}};
+    Device *device{new PNGDevice{"./output.png"}};
     device->Init();
 
     // 初始化场景
@@ -38,13 +39,14 @@ int main(int argc, const char **argv)
     ball.SetFilename("./ball.obj");
     ball.Init();
 
-    Vector4d ballPosition{0.0, 0.0, -3, 1.0};
+    Vector4d ballPosition{0.0, 0.0, -2, 1.0};
     ball.SetPosition(ballPosition);
 
-    // scene->GetObjects().push_back(ball);
+    scene->GetObjects().push_back(ball);
 
     Light light;
     light.position = {0.0, 0.0, 0.0, 1.0};
+    // light.I = 0.35;
     light.I = 2;
 
     scene->GetLights().push_back(light);

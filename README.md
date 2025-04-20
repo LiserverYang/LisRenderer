@@ -8,6 +8,8 @@
 
 ## 一些渲染图片
 
-![正方体深度测试](./Images/OneCube_ZBuffer.tga)
+![正方体深度测试](./Images/OneCube_zBuffer.png "正方体深度测试")
 
-![正方体](./Images/OneCube.tga)
+![正方体](./Images/OneCube.png "正方体")
+
+![球体](./Images/OneBall.png "球体")

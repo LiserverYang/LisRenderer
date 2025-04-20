@@ -5,6 +5,7 @@
 #include "RasterizationRenderer.hpp"
 #include "Drawer.hpp"
 #include "ImageDevice.hpp"
+#include "PNGDevice.hpp"
 
 #include <iostream>
 #include <unordered_map>
@@ -22,7 +23,7 @@ struct TriangleInformation
 };
 
 std::array<std::array<TriangleInformation, DEFAULT_WIDTH>, DEFAULT_HEIGHT> refMap;
-std::unique_ptr<ImageDevice> zBufferDevice;
+std::unique_ptr<Device> zBufferDevice;
 
 void RasterizationRenderer::Render()
 {
@@ -168,7 +169,7 @@ inline int sgn(double a)
 
 void RasterizationRenderer::Shading()
 {
-    zBufferDevice = std::make_unique<ImageDevice>("./output_zbuffer.tga");
+    zBufferDevice = std::make_unique<PNGDevice>("./output_zbuffer.png");
     zBufferDevice->Init();
 
     // 深度缓冲，获得所有像素所在的三角形
