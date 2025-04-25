@@ -6,10 +6,11 @@
 
 #include <iostream>
 
-void Renderer::Init(Device *outputDevice, Scene *scene)
+void Renderer::Init(std::unique_ptr<Device> outputDevice, std::unique_ptr<Scene> scene, std::unique_ptr<Arguments> arguments)
 {
-    device.reset(outputDevice);
-    this->scene.reset(scene);
+    this->device = std::move(outputDevice);
+    this->scene = std::move(scene);
+    this->arguments = std::move(arguments);
 
     Vector4d color = {0.0, 0.0, 0.0, 1.0};
 

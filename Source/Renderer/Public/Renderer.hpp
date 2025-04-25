@@ -6,6 +6,7 @@
 
 #include "Device.hpp"
 #include "Scene.hpp"
+#include "Arguments.hpp"
 
 #include <memory>
 
@@ -21,6 +22,7 @@ class Renderer
 protected:
     std::unique_ptr<Device> device;
     std::unique_ptr<Scene> scene;
+    std::unique_ptr<Arguments> arguments;
 
 public:
     Renderer() = default;
@@ -31,7 +33,7 @@ public:
      *
      * @param outputDevice 成像设备，一般是窗口或图片文件
      */
-    void Init(Device *outputDevice, Scene *sence);
+    void Init(std::unique_ptr<Device> outputDevice, std::unique_ptr<Scene> sence, std::unique_ptr<Arguments> arguments);
 
     /**
      * 使渲染器进行渲染
