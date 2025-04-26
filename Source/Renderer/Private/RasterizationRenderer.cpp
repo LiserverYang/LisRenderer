@@ -206,6 +206,11 @@ void RasterizationRenderer::Shading()
             {
                 for (int y = yMin; y <= yMax; y++)
                 {
+                    if (0 > x || x >= DEFAULT_WIDTH || 0 > y || y >= DEFAULT_HEIGHT)
+                    {
+                        continue;
+                    }
+
                     // 检测是否在三角形内
                     const Vector3d P{x * 1.0, y * 1.0, 0};
                     const Vector3d AP = -P + triangle[0].position.head<3>();

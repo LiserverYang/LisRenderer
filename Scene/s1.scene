@@ -10,13 +10,13 @@ c  0.0 0.0 0.0    0.0 0.0 -1.0   0.0 1.0 0.0
 
 # Cube
 
-#    FilePath           Position       Scale      Rotation 
-o ./Objects/cube.obj  2.0 0.0 -4.5  1.0 1.0 1.0  0.0 0.0 0.0
+#    FilePath           Position       Scale         Rotation 
+# o ./Objects/cube.obj  0.0 0.0 -4.5  1.0 1.0 1.0  0.0 0.0 0.0
 
 # Ball
 
-#    FilePath           Position      Scale       Rotation 
-# o ./Objects/ball.obj  0.0 0.0 -2.0  1.0 1.0 1.0  0.0 0.0 0.0
+#    FilePath           Position      Scale          Rotation 
+o ./Objects/ball.obj  0.0 0.0 -4.5  1.75 1.75 1.75  0.0 0.0 0.0
 
 # Lights
 

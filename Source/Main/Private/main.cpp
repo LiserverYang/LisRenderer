@@ -11,18 +11,7 @@
 #include <iostream>
 #include <string>
 
-#ifndef COMPILING
-#define COMPILE_INFO 1, 2, 3, 4
-#define GITHUB_VERSION "xxx"
-#endif
-
-#define _STR(a, b, c, d) #a ", " #b ", " #c ", " #d
-#define STR(x) _STR(x)
-
-#define _STRGV(a) #a
-#define STRGV(x) _STRGV(x)
-
-const std::string VERSION = (std::string) "0.0.1 " + STRGV(GITHUB_VERSION);
+#include "Genericed.hpp"
 
 int main(int argc, const char **argv)
 {
@@ -34,7 +23,7 @@ int main(int argc, const char **argv)
     }
     else if (strcmp(argv[1], "--version") == 0)
     {
-        std::cout << VERSION + " (" + std::string(STR(COMPILE_INFO)) + ")\n" + (std::string) "Copyrigt 2025, LiserverYang. All rights reserved. MIT License.";
+        std::cout << VERSION + " (" + COMPILE_INFO + ")\n" + COPYRIGHT;
 
         return 0;
     }

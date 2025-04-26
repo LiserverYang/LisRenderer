@@ -30,7 +30,13 @@ class RendererTarget(BuildSystem.TargetBase):
                 self.ArgumentsAdded += ["-O1", "-g", "-D__DEBUG__"]
 
         GithubVersion: str = subprocess.check_output(["git", "log", "--oneline", "-n", "1"]).split()[0].decode("utf-8")
+        CompileInfo: str = f"{BuildSystem.GetCurrentSystem().name}_x86_64, g++ {BuildSystem.BuildContext.GxxVersionStr[0:-1]}, Built by LisBuilder {BuildSystem.LisBuilderVersionStr}, {time.asctime(time.localtime(time.time()))}"
+        LicenseStr: str = ""
 
-        self.ArgumentsAdded += ["-DCOMPILING",
-                                f'-DCOMPILE_INFO=\"{BuildSystem.GetCurrentSystem().name}_x86_64, g++, Built by LisBuilder, {time.asctime(time.localtime(time.time()))}\"',
-                                f"-DGITHUB_VERSION=\"{GithubVersion}\""]
+        with open("./LICENSE", 'r') as f:
+            LicenseStr = f.read()
+
+        Copyright: str = f"Copyright 2025, LiserverYang. All rights reserved.\n{LicenseStr}\""
+
+        with open("./Source/Main/Public/Genericed.hpp", "w") as f:
+            f.write(f'/**\n * Copyrigt 2025, LiserverYang. All rights reserved.\n * Genericed by BuildSystem.\n */\n\n#include "VersionInfo.hpp"\n\n\nconst std::string VERSION = lisRendererVersion + " " + "{GithubVersion}";\nconst std::string COMPILE_INFO = "{CompileInfo}";\nconst std::string COPYRIGHT = R"({Copyright})";')
