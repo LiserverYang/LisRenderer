@@ -17,5 +17,7 @@ __pycache__
 Test/**
 
 compile_commands.json
+output_zbuffer.png
+output.png
 
 .cache
