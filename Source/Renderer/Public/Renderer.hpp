@@ -21,6 +21,7 @@ class Renderer
 {
 protected:
     std::unique_ptr<Device> device;
+    std::unique_ptr<Device> bufferdevice;
     std::unique_ptr<Scene> scene;
     std::unique_ptr<Arguments> arguments;
 
@@ -33,7 +34,7 @@ public:
      *
      * @param outputDevice 成像设备，一般是窗口或图片文件
      */
-    void Init(std::unique_ptr<Device> outputDevice, std::unique_ptr<Scene> sence, std::unique_ptr<Arguments> arguments);
+    void Init(std::unique_ptr<Device> outputDevice, std::unique_ptr<Device> zBufferDevice, std::unique_ptr<Scene> sence, std::unique_ptr<Arguments> arguments);
 
     /**
      * 使渲染器进行渲染

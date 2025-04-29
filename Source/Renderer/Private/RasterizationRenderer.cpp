@@ -23,7 +23,6 @@ struct TriangleInformation
 };
 
 std::array<std::array<TriangleInformation, DEFAULT_WIDTH>, DEFAULT_HEIGHT> refMap;
-std::unique_ptr<Device> zBufferDevice;
 
 void RasterizationRenderer::Render()
 {
@@ -34,9 +33,9 @@ void RasterizationRenderer::Render()
     // {
     //     for (auto &trangle : object.GetTrianglesList())
     //     {
-    //         Drawer::DrawLine((trangle[0].position.head<2>().array().round()).cast<int>(), (trangle[1].position.head<2>().array().round()).cast<int>(), {1.0, 1.0, 1.0, 1.0}, device.get());
-    //         Drawer::DrawLine((trangle[0].position.head<2>().array().round()).cast<int>(), (trangle[2].position.head<2>().array().round()).cast<int>(), {1.0, 1.0, 1.0, 1.0}, device.get());
-    //         Drawer::DrawLine((trangle[1].position.head<2>().array().round()).cast<int>(), (trangle[2].position.head<2>().array().round()).cast<int>(), {1.0, 1.0, 1.0, 1.0}, device.get());
+    //         Drawer::DrawLine((trangle[0].position.head<2>().array().round()).cast<int>(), (trangle[1].position.head<2>().array().round()).cast<int>(), {144.0 / 255, 144.0 / 255, 137.0 / 255, 1.0}, device.get());
+    //         Drawer::DrawLine((trangle[0].position.head<2>().array().round()).cast<int>(), (trangle[2].position.head<2>().array().round()).cast<int>(), {144.0 / 255, 144.0 / 255, 137.0 / 255, 1.0}, device.get());
+    //         Drawer::DrawLine((trangle[1].position.head<2>().array().round()).cast<int>(), (trangle[2].position.head<2>().array().round()).cast<int>(), {144.0 / 255, 144.0 / 255, 137.0 / 255, 1.0}, device.get());
     //     }
     // }
 
@@ -169,9 +168,6 @@ inline int sgn(double a)
 
 void RasterizationRenderer::Shading()
 {
-    zBufferDevice = DeviceFactory::CreateDeviceFromString(arguments->deviceType, arguments->zBufferFilePath);
-    zBufferDevice->Init();
-
     // 深度缓冲，获得所有像素所在的三角形
 
     Vector4d defaultColor{0xFFFFF, 0xFFFFF, 0xFFFFF, 1.0};
@@ -180,7 +176,7 @@ void RasterizationRenderer::Shading()
     {
         for (int j = 0; j < DEFAULT_HEIGHT; j++)
         {
-            zBufferDevice->SetPixel(i, j, defaultColor);
+            bufferdevice->SetPixel(i, j, defaultColor);
         }
     }
 
@@ -238,13 +234,13 @@ void RasterizationRenderer::Shading()
 
                         const double z = triangle[0].position[2] * alpha + triangle[1].position[2] * beta + triangle[2].position[2] * gamma;
 
-                        if (z <= zBufferDevice->GetPixel(x, y)[0])
+                        if (z <= bufferdevice->GetPixel(x, y)[0])
                         {
                             // 更新
                             refMap[y][x] = TriangleInformation{i, objIndex};
 
                             Vector4d newColor{z, z, z, 1.0};
-                            zBufferDevice->SetPixel(x, y, newColor);
+                            bufferdevice->SetPixel(x, y, newColor);
                         }
                     }
                 }
@@ -314,7 +310,5 @@ void RasterizationRenderer::Shading()
         }
     }
 
-    zBufferDevice->Push();
-    zBufferDevice->Clean();
-    zBufferDevice.reset();
+    bufferdevice->Push();
 }

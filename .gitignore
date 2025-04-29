@@ -20,4 +20,6 @@ compile_commands.json
 output_zbuffer.png
 output.png
 
+Genericed.hpp
+
 .cache
